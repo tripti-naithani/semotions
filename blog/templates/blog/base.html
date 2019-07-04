@@ -1,0 +1,128 @@
+<!-- this is base template with navbar and footer -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Semotions</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/1b3553c99a.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+
+    <style>
+    a {
+      color: #000000;
+    }
+    p {
+      color: #000000;
+    }
+
+    /* h2{
+      color: #000000;
+    } */
+
+    body{
+      /* background-color: #800040; */
+      background: url({% static "blog/back.png" %}) no-repeat center center fixed ;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+          }
+
+    </style>
+
+</head>
+<body>
+  <!-- <img src="{% static "blog/back.jpg" %}" alt="My image"> -->
+
+
+<!-- navbar -->
+<nav class="navbar navbar-inverse" >
+    <div class="container" >
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'blog:home' %}">
+              <i class="far fa-frown"></i>Semotions<i class="far fa-smile"></i>
+            </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse navbar-right">
+            <!-- show registration only if user is not yet authenticated -->
+            {% if not user.is_authenticated %}
+                <ul class="nav navbar-nav ">
+                    <li class="active"><a href="{% url 'register' %}">New user?</a></li>
+                </ul>
+            {% endif %}
+            <!-- show login only if user is not yet authenticated -->
+            {% if not user.is_authenticated %}
+                <ul class="nav navbar-nav ">
+                    <li class="active"><a href="{% url 'login' %}">Login</a></li>
+                </ul>
+            {% endif %}
+            <!-- show My Blog only if user is authenticated -->
+            {% if user.is_authenticated %}
+                <ul class="nav navbar-nav ">
+                    <li class="active"><a href="{% url 'blog:user_posts' user.username %}">My Post</a></li>
+                </ul>
+            {% endif %}
+            <!-- show new post only if user is authenticated -->
+            {% if user.is_authenticated %}
+                <ul class="nav navbar-nav ">
+                    <li class="active"><a href="{% url 'blog:create_post' %}">New Post</a></li>
+                </ul>
+            {% endif %}
+            <!-- show sign out only if user is authenticated -->
+            {% if user.is_authenticated %}
+                <ul class="nav navbar-nav ">
+                    <li class="active"><a href="{% url 'logout' %}">Sign Out</a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+
+
+
+<div id="content">
+    {% block content %}{% endblock %}
+</div> -->
+
+<hr>
+
+<!-- footer -->
+<div class="container" style="font-size: 18px; ">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <!-- Logged user info -->
+            {% if user.is_authenticated %}
+                <p class="text-center">
+                    | {{ user.username }}
+                    | {{ user.email }}
+                    <!-- | Admin:{{ user.is_superuser }} -->
+                    | <a href="{% url 'logout' %}">Sign Out</a>
+                </p>
+            {% endif %}
+
+            <div>
+                <p class="text-center">&copy; 2019 Bhanuja & Tripti</p>
+                <center>
+                  <i class="fas fa-envelope" style = "font-size :36px"></i>
+                  <i class="fab fa-twitter" style = "font-size :36px"></i>
+                  <i class="fab fa-instagram" style = "font-size :36px"></i>
+                  <i class="fab fa-linkedin" style = "font-size :36px"></i>
+                </center>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</div>
+
+</body>
+</html>
