@@ -8,4 +8,4 @@ Users can post on the website
 Users can update & delete their posts
 Users can view & reply to other posts
 
-You can go for a demo on: https://bhanujaaggarwal.pythonanywhere.com/blog
+You can go for a demo on: http://semotions.pythonanywhere.com/blog/
